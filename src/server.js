@@ -2,10 +2,10 @@ require("dotenv").config();
 const express = require("express");
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
+const cors = require("cors");
 const path = require("path");
 const http = require("http");
 const { Server } = require("socket.io");
-
 
 const connectDB = require("./config/database");
 const authRoute = require("./routes/auth.routes");
@@ -38,6 +38,8 @@ const io = new Server(server, {
     origin: "*",
   },
 });
+app.use(cors());
+
 
 // Setting Swagger
 const swaggerOptions = {
