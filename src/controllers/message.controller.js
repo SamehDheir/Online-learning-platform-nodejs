@@ -41,10 +41,9 @@ exports.getMessages = async (req, res, next) => {
   try {
     const { chatId } = req.params;
 
-    // التأكد من وجود المحادثة
     const messages = await Message.find({ chatId })
-      .populate("sender", "name email") // جلب بيانات المرسل (الاسم والإيميل)
-      .sort({ createdAt: 1 }); // ترتيب الرسائل تصاعديًا (من الأقدم إلى الأحدث)
+      .populate("sender", "name email") 
+      .sort({ createdAt: 1 }); 
 
     res.status(200).json({ success: true, messages });
   } catch (error) {

@@ -132,10 +132,76 @@ const router = express.Router();
  *     security: []
  */
 
+/**
+ * @swagger
+ * /auth/send-reset-code:
+ *   post:
+ *     summary: Send password reset code
+ *     description: Sends a reset code to the user's email for password recovery.
+ *     tags:
+ *       - Authentication
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Reset code sent successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       401:
+ *         description: Unauthorized - Token required
+ *       400:
+ *         description: Invalid request or user not found
+ */
+
+/**
+ * @swagger
+ * /auth/reset-password:
+ *   post:
+ *     summary: Reset user password
+ *     description: Resets the user's password using a valid reset code.
+ *     tags:
+ *       - Authentication
+ *     security:
+ *       - BearerAuth: []
+ *     requestBody:
+ *       description: User's email, reset code, and new password
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               resetCode:
+ *                 type: string
+ *               newPassword:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Password reset successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       401:
+ *         description: Unauthorized - Token required
+ *       400:
+ *         description: Invalid reset code or expired
+ */
+
+
 router.post("/register", register);
 router.post("/login", login);
 router.post("/send-reset-code", protect, sendResetCode);
-// router.post("/verify-reset-code", protect, verifyResetCode);
 router.post("/reset-password", protect, resetPassword);
 
 module.exports = router;

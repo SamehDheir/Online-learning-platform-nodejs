@@ -7,22 +7,20 @@ exports.generateCertificate = async (req, res, next) => {
     const { userName, courseName, userEmail, userId } = req.body;
 
     if (!userName || !courseName || !userEmail || !userId) {
-      return res
-        .status(400)
-        .json({
-          message: "User name, course name, email, and userId are required",
-        });
+      return res.status(400).json({
+        message: "User name, course name, email, and userId are required",
+      });
     }
 
     console.log(
       `📝 Generating certificate for: ${userName}, Course: ${courseName}`
     );
 
-    // توليد الشهادة
+    // Generate certificate
     const certificatePath = await generateCertificate(userName, courseName);
     console.log(`✅ Certificate generated at: ${certificatePath}`);
 
-    // إرسال الشهادة عبر البريد الإلكتروني
+    //Send the certificate via email
     await sendCertificateEmail(
       userEmail,
       userName,
@@ -31,7 +29,7 @@ exports.generateCertificate = async (req, res, next) => {
     );
     console.log(`📩 Email sent to: ${userEmail}`);
 
-    // إضافة الإشعار إلى قاعدة البيانات
+    // Add the notification to the database
     await Notification.create({
       userId: userId,
       message: `🎓 Congratulations! You have completed the ${courseName} course and earned a certificate.`,

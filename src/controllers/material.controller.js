@@ -2,7 +2,6 @@ const Material = require("../models/material.model");
 const path = require("path");
 const fs = require("fs");
 
-// رفع ملف
 exports.uploadMaterial = async (req, res, next) => {
   try {
     if (!req.file) {
@@ -14,7 +13,6 @@ exports.uploadMaterial = async (req, res, next) => {
       return res.status(400).json({ message: "Course ID is required" });
     }
 
-    // حفظ بيانات الملف في قاعدة البيانات
     const material = new Material({
       courseId,
       instructorId: req.user._id,
@@ -30,7 +28,6 @@ exports.uploadMaterial = async (req, res, next) => {
   }
 };
 
-// جلب جميع الملفات الخاصة بكورس معين
 exports.getMaterialsByCourse = async (req, res, next) => {
   try {
     const { courseId } = req.params;
@@ -43,7 +40,6 @@ exports.getMaterialsByCourse = async (req, res, next) => {
   }
 };
 
-// حذف ملف
 exports.deleteMaterial = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -52,7 +48,6 @@ exports.deleteMaterial = async (req, res, next) => {
       return res.status(404).json({ message: "Material not found" });
     }
 
-    // حذف الملف من السيرفر
     const filePath = path.join(
       __dirname,
       "../uploads/materials",
@@ -62,7 +57,6 @@ exports.deleteMaterial = async (req, res, next) => {
       fs.unlinkSync(filePath);
     }
 
-    // حذف السجل من قاعدة البيانات
     await Material.findByIdAndDelete(id);
     res.status(200).json({ message: "Material deleted successfully" });
   } catch (error) {

@@ -1,7 +1,6 @@
 const Course = require("../models/course.model");
 const User = require("../models/user.model");
 
-// Create a new Course
 exports.createCourse = async (req, res, next) => {
   try {
     const { title, description, price, category } = req.body;
@@ -29,7 +28,6 @@ exports.createCourse = async (req, res, next) => {
   }
 };
 
-// Get all courses with filters
 exports.getAllCourses = async (req, res, next) => {
   try {
     const {
@@ -94,7 +92,6 @@ exports.getAllCourses = async (req, res, next) => {
   }
 };
 
-// Get Course By ID
 exports.getCourseById = async (req, res, next) => {
   const { courseId } = req.params;
 
@@ -115,7 +112,6 @@ exports.getCourseById = async (req, res, next) => {
   }
 };
 
-// Update a Course
 exports.updateCourse = async (req, res, next) => {
   const { courseId } = req.params;
   const { title, description, price, category } = req.body;
@@ -145,7 +141,7 @@ exports.updateCourse = async (req, res, next) => {
   }
 };
 
-// Delete Course
+
 exports.deleteCourse = async (req, res, next) => {
   const { courseId } = req.params;
 
@@ -266,7 +262,6 @@ exports.updateProgress = async (req, res, next) => {
   }
 };
 
-// Add a review to a course
 exports.addReview = async (req, res, next) => {
   const { courseId } = req.params;
   const { rating, review } = req.body;

@@ -6,14 +6,12 @@ exports.completeCourse = async (req, res, next) => {
   try {
     const { userId, courseId } = req.body;
 
-    // التحقق من البيانات المدخلة
     if (!userId || !courseId) {
       return res
         .status(400)
         .json({ error: "User ID and Course ID are required." });
     }
 
-    // تحديث حالة الدورة كمكتملة
     const updatedUser = await User.findOneAndUpdate(
       { _id: userId, "courses.courseId": courseId },
       { $set: { "courses.$.completed": true } },
@@ -24,20 +22,17 @@ exports.completeCourse = async (req, res, next) => {
       return res.status(404).json({ error: "User or course not found." });
     }
 
-    // جلب بيانات المستخدم
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ error: "User not found." });
     }
 
-    // إنشاء إشعار جديد في قاعدة البيانات
     const notification = new Notification({
       userId: userId,
       message: `🎉 Congratulations! You have completed the course: ${courseId}`,
     });
     await notification.save();
 
-    // إرسال إشعار بالبريد الإلكتروني
     await sendNotificationEmail(
       user.email,
       "🎉 Congratulations on completing a course!",
@@ -52,7 +47,7 @@ exports.completeCourse = async (req, res, next) => {
   }
 };
 
-//
+
 exports.getAllNotifications = async (req, res, next) => {
   try {
     const notifications = await Notification.find({
@@ -64,7 +59,6 @@ exports.getAllNotifications = async (req, res, next) => {
   }
 };
 
-// ✅ تعيين إشعار واحد كمقروء
 exports.readNotification = async (req, res, next) => {
   try {
     const { notificationId } = req.params;
@@ -91,7 +85,6 @@ exports.readNotification = async (req, res, next) => {
   }
 };
 
-// ✅ تعيين جميع الإشعارات كمقروءة
 exports.markAllRead = async (req, res, next) => {
   try {
     await Notification.updateMany(

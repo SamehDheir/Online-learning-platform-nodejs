@@ -77,11 +77,10 @@ exports.getUserChats = async (req, res) => {
   try {
     const userId = req.user._id;
 
-    // استرجاع المحادثات التي تحتوي على المستخدم
     const chats = await Chat.find({ participants: userId })
-      .populate("participants", "name") // استرجاع أسماء المشاركين
-      .populate("lastMessage") // استرجاع آخر رسالة في المحادثة
-      .sort({ updatedAt: -1 }); // ترتيب المحادثات حسب آخر تحديث (اختياري)
+      .populate("participants", "name")
+      .populate("lastMessage")
+      .sort({ updatedAt: -1 });
 
     if (chats.length === 0) {
       return res.status(404).json({ message: "No chats found for this user" });
@@ -89,57 +88,47 @@ exports.getUserChats = async (req, res) => {
 
     res.status(200).json({ success: true, chats });
   } catch (error) {
-    console.error(error); // لعرض الخطأ في السيرفر
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "An error occurred while fetching chats",
-      });
+    console.error(error); 
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while fetching chats",
+    });
   }
 };
 
 exports.removeUserFromGroup = async (req, res) => {
   try {
     const { chatId, userIdToRemove } = req.body;
-    const userId = req.user._id; // المستخدم الذي قام بحذف العضو
+    const userId = req.user._id;
 
-    // العثور على المحادثة
     const chat = await Chat.findById(chatId);
     if (!chat) {
       return res.status(404).json({ message: "Chat not found" });
     }
 
-    // التأكد أن المستخدم هو أحد المشاركين في المحادثة
+    // Ensure that the user is a participant in the conversation
     if (!chat.participants.includes(userId)) {
       return res
         .status(403)
         .json({ message: "You are not a participant of this group" });
     }
 
-    // إزالة العضو المستهدف من المشاركين
     const updatedParticipants = chat.participants.filter(
       (participant) => participant.toString() !== userIdToRemove
     );
 
     chat.participants = updatedParticipants;
 
-    // إذا كان عدد المشاركين أقل من 2، نحذف المحادثة والرسائل
     if (chat.participants.length < 2) {
-      // حذف جميع الرسائل المتعلقة بالمحادثة
       await Message.deleteMany({ chatId });
 
-      // حذف المحادثة
       await Chat.findByIdAndDelete(chatId);
-      return res
-        .status(200)
-        .json({
-          message:
-            "Chat and messages deleted as the group had less than 2 participants",
-        });
+      return res.status(200).json({
+        message:
+          "Chat and messages deleted as the group had less than 2 participants",
+      });
     }
 
-    // حفظ التحديثات
     await chat.save();
     res
       .status(200)
