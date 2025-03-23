@@ -57,10 +57,24 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "http://localhost:4000",
+        url: "https://online-learning-platform-nodejs-production.up.railway.app",
       },
     ],
   },
+  basePath: "/",
+  securityDefinitions: {
+    BearerAuth: {
+      type: "apiKey",
+      name: "Authorization",
+      in: "header",
+      description: "Enter your bearer token in the format: Bearer <token>",
+    },
+  },
+  security: [
+    {
+      BearerAuth: [],
+    },
+  ],
   apis: ["src/routes/*.js"],
 };
 
