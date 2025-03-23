@@ -59,7 +59,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /courses:
+ * /api/courses:
  *   post:
  *     summary: Create a new course
  *     description: Allows instructors to create a new course.
@@ -87,7 +87,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /courses:
+ * /api/courses:
  *   get:
  *     summary: Get all courses
  *     description: Retrieve a list of all courses.
@@ -108,7 +108,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /courses/{courseId}:
+ * /api/courses/{courseId}:
  *   get:
  *     summary: Get a course by ID
  *     description: Retrieve a course by its ID.
@@ -134,7 +134,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /courses/{courseId}:
+ * /api/courses/{courseId}:
  *   put:
  *     summary: Update a course
  *     description: Allows instructors to update an existing course.
@@ -171,7 +171,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /courses/{courseId}:
+ * /api/courses/{courseId}:
  *   delete:
  *     summary: Delete a course
  *     description: Allows instructors to delete a course.
@@ -195,7 +195,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /courses/{courseId}/enroll:
+ * /api/courses/{courseId}/enroll:
  *   post:
  *     summary: Enroll in a course
  *     description: Allows students to enroll in a course.
@@ -221,7 +221,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /courses/{courseId}/progress:
+ * /api/courses/{courseId}/progress:
  *   post:
  *     summary: Update student progress
  *     description: Allows students to update their progress in a course.
@@ -258,7 +258,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /courses/{courseId}/review:
+ * /api/courses/{courseId}/review:
  *   post:
  *     summary: Add a review for a course
  *     description: Allows students to add a review and rating for a course.
@@ -298,7 +298,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /students/{studentId}/ratings:
+ * /api/students/{studentId}/ratings:
  *   get:
  *     summary: Get all ratings by a student
  *     description: Allows admins, instructors, and students to retrieve a student's ratings for courses.

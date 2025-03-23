@@ -52,7 +52,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /messages:
+ * /api/messages:
  *   post:
  *     summary: Send a new message in a chat
  *     tags: [Messages]
@@ -98,7 +98,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /messages/{chatId}:
+ * /api/messages/{chatId}:
  *   get:
  *     summary: Get all messages in a chat
  *     tags: [Messages]

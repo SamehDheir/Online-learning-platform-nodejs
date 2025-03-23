@@ -55,7 +55,7 @@ const {
 
 /**
  * @swagger
- * /payments/pay:
+ * /api/payments/pay:
  *   post:
  *     summary: Process a payment for a student
  *     tags: [Payments]

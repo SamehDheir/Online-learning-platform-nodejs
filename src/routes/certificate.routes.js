@@ -7,7 +7,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /certificate/generate-certificate:
+ * /api/certificate/generate-certificate:
  *   post:
  *     summary: Generate a course completion certificate
  *     description: Generates a certificate for a user upon course completion. Only admins can generate certificates.
@@ -43,7 +43,7 @@ const router = express.Router();
  *       400:
  *         description: Invalid request data
  *
- * /certificate/upload-logo:
+ * /api/certificate/upload-logo:
  *   post:
  *     summary: Upload a logo for certificates
  *     description: Allows uploading a logo to be used in certificates.

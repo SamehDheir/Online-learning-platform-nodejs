@@ -54,7 +54,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /materials/upload:
+ * /api/materials/upload:
  *   post:
  *     summary: Upload a new material (file) for a course
  *     tags: [Materials]
@@ -96,7 +96,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /materials/{courseId}:
+ * /api/materials/{courseId}:
  *   get:
  *     summary: Get all materials for a specific course
  *     tags: [Materials]
@@ -124,7 +124,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /materials/{id}:
+ * /api/materials/{id}:
  *   delete:
  *     summary: Delete a material by its ID
  *     tags: [Materials]

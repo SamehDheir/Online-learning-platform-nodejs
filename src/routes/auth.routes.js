@@ -47,7 +47,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /auth/register:
+ * /api/auth/register:
  *   post:
  *     summary: Register a new user
  *     description: Allows a new user to register with a username, email, and password.
@@ -88,7 +88,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /auth/login:
+ * /api/auth/login:
  *   post:
  *     summary: Log in a user
  *     description: Allows a user to log in with their email and password and receive a JWT token.
@@ -134,7 +134,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /auth/send-reset-code:
+ * /api/auth/send-reset-code:
  *   post:
  *     summary: Send password reset code
  *     description: Sends a reset code to the user's email for password recovery.
@@ -160,7 +160,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /auth/reset-password:
+ * /api/auth/reset-password:
  *   post:
  *     summary: Reset user password
  *     description: Resets the user's password using a valid reset code.

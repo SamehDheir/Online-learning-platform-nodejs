@@ -49,7 +49,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /notifications:
+ * /api/notifications:
  *   get:
  *     summary: Get all notifications for a user
  *     tags: [Notifications]
@@ -72,7 +72,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /notifications/mark-read/{notificationId}:
+ * /api/notifications/mark-read/{notificationId}:
  *   put:
  *     summary: Mark a single notification as read
  *     tags: [Notifications]
@@ -106,7 +106,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /notifications/mark-all-read:
+ * /api/notifications/mark-all-read:
  *   put:
  *     summary: Mark all notifications as read
  *     tags: [Notifications]

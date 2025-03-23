@@ -68,7 +68,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /questions/ask/{courseId}:
+ * /api/questions/ask/{courseId}:
  *   post:
  *     summary: Ask a question in a course
  *     tags: [Questions]
@@ -114,7 +114,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /questions/answer/{questionId}:
+ * /api/questions/answer/{questionId}:
  *   post:
  *     summary: Answer a question in a course
  *     tags: [Questions]
@@ -164,7 +164,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /questions/{courseId}:
+ * /api/questions/{courseId}:
  *   get:
  *     summary: Get all questions for a course
  *     tags: [Questions]
@@ -194,7 +194,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /questions/{questionId}:
+ * /api/questions/{questionId}:
  *   delete:
  *     summary: Delete a question
  *     tags: [Questions]
