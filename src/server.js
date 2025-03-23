@@ -38,7 +38,13 @@ const io = new Server(server, {
     origin: "*",
   },
 });
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 // Setting Swagger
 const swaggerOptions = {
