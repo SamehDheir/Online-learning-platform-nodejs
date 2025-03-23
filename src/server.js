@@ -60,31 +60,32 @@ const swaggerOptions = {
         url: "https://online-learning-platform-nodejs-production.up.railway.app",
       },
     ],
-  },
-  basePath: "/",
-  securityDefinitions: {
-    BearerAuth: {
-      type: "apiKey",
-      name: "Authorization",
-      in: "header",
-      description: "Enter your bearer token in the format: Bearer <token>",
+    components: {
+      securitySchemes: {
+        BearerAuth: {
+          type: "apiKey",
+          in: "header",
+          name: "Authorization",
+          description: "Enter your JWT token here",
+        },
+      },
     },
+    security: [
+      {
+        BearerAuth: [],
+      },
+    ],
   },
-  security: [
-    {
-      BearerAuth: [],
-    },
-  ],
   apis: ["src/routes/*.js"],
 };
+
+// Setting swagger-jsdoc
+const swaggerDocs = swaggerJsdoc(swaggerOptions);
 
 app.use(express.json());
 
 // Connect to the database
 connectDB();
-
-// Setting swagger-jsdoc
-const swaggerDocs = swaggerJsdoc(swaggerOptions);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
